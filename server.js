@@ -19,6 +19,9 @@ socket.on('connect', function () { console.log("socket connected"); });
 //   console.log('Drop and Resync with { force: true }');
 // });
 
+socket.emit('join_room','room_ups')
+socket.emit('join_room','room_rectifier')
+
 
 socket.on('rectifier_datas', async (datas) => {
     var data = JSON.parse(datas);
