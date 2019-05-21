@@ -6,12 +6,11 @@ const Log_rectifier = db.rectifier_timeseries;
 const Latest_ups = db.ups_latest;
 const Log_ups = db.ups_timeseries;
 
-
 const Latest_pdu = db.pdu_latest;
 const Log_pdu = db.pdu_timeseries;
 
-const Latest_battery = db.ups_latest;
-const Log_battery = db.ups_timeseries;
+const Latest_battery = db.battery_latest;
+const Log_battery = db.battery_timeseries;
 
 const Latest_io = db.io_latest;
 const Log_io = db.io_timeseries;
@@ -133,9 +132,19 @@ const updateValue = (data,latesdb,logdb) =>{
                 }
         })}))
         .then( () => {
+            
+            var newValue = []
+            
+            data.newValue.map(d=>{
+                 newValue.push({
+                     "id" : d.id,
+                     "value" : d.value
+                 })
+            })
             logdb.create({
-                id_profile : data.id_profile,
-                data : JSON.stringify(data.newValue)
+                id_profile : data.newValue[0].id_profile,
+                data : JSON.stringify(newValue)
+                //old format JSON.stringify(data.newValue)
             }).then( () => {
                 console.log("Log Create");
             })

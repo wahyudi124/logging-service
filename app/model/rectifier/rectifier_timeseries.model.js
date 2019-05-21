@@ -7,6 +7,9 @@ module.exports = (sequelize, Sequelize) => {
         data : {
             type: Sequelize.TEXT('long')
         },
+        id_profile : {
+            type : Sequelize.INTEGER
+        }
     },
     {
         timestamps: false,  // I do want timestamps here
